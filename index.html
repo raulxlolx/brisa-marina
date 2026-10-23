@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta property="og:title" content="Inauguración Brisa Marina">
+<meta property="og:description" content="Viernes 20 de noviembre · 20:30 h. ¡Te esperamos!">
+<title>Inauguración Brisa Marina</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sail&family=Figtree:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una sola columna tipo tarjeta-billete sobre un mar nocturno, olas animadas abajo del encabezado */
+:root{
+  --mar:#0c2f3d;
+  --mar-hondo:#071e28;
+  --espuma:#eef6f4;
+  --niebla:#9fc3c4;
+  --sol:#f4c65a;
+  --linea:rgba(238,246,244,.18);
+  --f-display:"Sail", "Brush Script MT", cursive;
+  --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"DM Mono", ui-monospace, Menlo, monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:radial-gradient(120% 70% at 50% 0%, #15495a 0%, var(--mar) 45%, var(--mar-hondo) 100%) fixed, var(--mar-hondo);
+  color:var(--espuma);
+  font-family:var(--f-body);
+  font-size:16px;
+  line-height:1.55;
+  min-height:100%;
+}
+.wrap{
+  max-width:560px;margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+  padding-block:40px 56px;
+  display:flex;flex-direction:column;gap:28px;
+}
+.eyebrow{
+  font-family:var(--f-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--niebla);text-align:center;
+}
+header{text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center}
+h1{
+  font-family:var(--f-display);font-weight:400;
+  font-size:clamp(64px, 19vw, 112px);line-height:.95;margin:6px 0 0;
+  color:var(--espuma);text-wrap:balance;
+  text-shadow:0 2px 30px rgba(244,198,90,.18);
+}
+.sub{font-size:19px;color:var(--niebla);margin:0;max-width:30ch;text-wrap:balance}
+.sub strong{color:var(--sol);font-weight:500}
+canvas#olas{width:100%;height:70px;display:block}
+.billete{
+  border:1px solid var(--linea);border-radius:18px;
+  background:rgba(7,30,40,.55);
+  backdrop-filter:blur(4px);
+  overflow:hidden;
+}
+.billete .fila{
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.dato{padding:20px 22px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.dato + .dato{border-left:1px dashed var(--linea)}
+.dato .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--niebla)}
+.dato .v{font-size:22px;font-weight:700;line-height:1.2}
+.dato .v small{display:block;font-size:15px;font-weight:400;color:var(--niebla)}
+.corte{height:0;border-top:1px dashed var(--linea);position:relative;margin:0 14px}
+.corte::before,.corte::after{
+  content:"";position:absolute;top:-11px;width:22px;height:22px;border-radius:50%;
+  background:var(--mar-hondo);border:1px solid var(--linea);
+}
+.corte::before{left:-26px}.corte::after{right:-26px}
+.lugar{padding:20px 22px;display:flex;flex-direction:column;gap:4px}
+.lugar a{color:var(--sol);text-underline-offset:3px;font-weight:500;width:fit-content}
+.cuenta{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;
+  font-variant-numeric:tabular-nums;
+}
+.cuenta div{padding:12px 4px;border-top:1px solid var(--linea)}
+.cuenta b{display:block;font-family:var(--f-mono);font-weight:500;font-size:28px;color:var(--sol)}
+.cuenta span{font-size:12px;color:var(--niebla);letter-spacing:.08em;text-transform:uppercase}
+.programa{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.programa li{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid var(--linea)}
+.programa li:last-child{border-bottom:0}
+.programa time{font-family:var(--f-mono);color:var(--sol);font-size:15px;padding-top:2px}
+.programa p{margin:0}
+.programa p em{display:block;font-style:normal;color:var(--niebla);font-size:14px}
+h2{font-family:var(--f-mono);font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--niebla);margin:0 0 4px}
+.rsvp{display:flex;flex-direction:column;gap:12px;text-align:center;align-items:center}
+.rsvp p{margin:0;max-width:36ch}
+.tel{
+  font-family:var(--f-mono);font-size:22px;letter-spacing:.04em;user-select:all;
+  padding:10px 16px;border:1px solid var(--linea);border-radius:10px;
+}
+.btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn{
+  font:500 15px var(--f-body);cursor:pointer;text-decoration:none;
+  padding:12px 20px;border-radius:999px;border:1px solid var(--sol);
+  background:var(--sol);color:var(--mar-hondo);
+}
+.btn.ghost{background:transparent;color:var(--sol)}
+.btn:focus-visible{outline:2px solid var(--espuma);outline-offset:3px}
+.toast{font-size:14px;color:var(--niebla);min-height:1.4em}
+.form{
+  width:100%;text-align:left;display:flex;flex-direction:column;gap:16px;
+  border:1px solid var(--linea);border-radius:18px;background:rgba(7,30,40,.55);
+  padding:22px;
+}
+.campo{display:flex;flex-direction:column;gap:6px;min-width:0;border:0;margin:0;padding:0}
+.campo label,.campo legend{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--niebla);padding:0;margin-bottom:6px}
+.campo input[type=text],.campo input[type=tel],.campo select,.campo textarea{
+  font:16px var(--f-body);color:var(--espuma);background:rgba(238,246,244,.06);
+  border:1px solid var(--linea);border-radius:10px;padding:12px 14px;width:100%;
+}
+.campo textarea{resize:vertical}
+.campo input::placeholder,.campo textarea::placeholder{color:rgba(159,195,196,.6)}
+.campo input:focus-visible,.campo select:focus-visible,.campo textarea:focus-visible{outline:2px solid var(--sol);outline-offset:1px;border-color:transparent}
+.campo input.mal{border-color:#ff9b85}
+.opciones{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{position:relative;cursor:pointer}
+.opt input{position:absolute;opacity:0;inset:0}
+.opt span{display:block;text-align:center;padding:12px 8px;border:1px solid var(--linea);border-radius:10px;font-weight:500}
+.opt input:checked + span{background:var(--sol);color:var(--mar-hondo);border-color:var(--sol)}
+.opt input:focus-visible + span{outline:2px solid var(--espuma);outline-offset:2px}
+.fila2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.error{color:#ff9b85;font-size:14px}
+.enviar{display:block;text-align:center;font-size:16px;padding:15px 20px;font-weight:700}
+.alt{font-size:14px;color:var(--niebla)}
+.alt .tel{font-size:15px;padding:2px 8px;display:inline-block;margin:0 2px}
+.btn.mini{padding:6px 12px;font-size:13px;margin-top:8px}
+@media (max-width:420px){.form{padding:16px}}
+footer{text-align:center;font-size:13px;color:var(--niebla)}
+@media (max-width:420px){
+  .dato{padding:16px}
+  .dato .v{font-size:19px}
+  .cuenta b{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Te invitamos a la inauguración de</div>
+    <h1>Brisa Marina</h1>
+    <p class="sub">Una noche para estrenar casa, con <strong>buena música, algo fresquito</strong> y la gente que queremos.</p>
+  </header>
+
+  <canvas id="olas" aria-hidden="true"></canvas>
+
+  <section class="billete" aria-label="Datos del evento">
+    <div class="fila">
+      <div class="dato"><span class="k">Día</span><span class="v">Viernes 20<small>de noviembre</small></span></div>
+      <div class="dato"><span class="k">Hora</span><span class="v">20:30 h<small>hasta que cierre la marea</small></span></div>
+    </div>
+    <div class="corte"></div>
+    <div class="lugar">
+      <span class="dato k" style="padding:0">Dónde</span>
+      <span style="font-size:19px;font-weight:700">Brisa Marina</span>
+      <span style="color:var(--niebla)">CA-31, 104<br>41730 Las Cabezas de San Juan, Sevilla</span>
+      <a href="https://www.google.com/maps/search/?api=1&query=CA-31%2C+104%2C+41730+Las+Cabezas+de+San+Juan%2C+Sevilla" target="_blank" rel="noopener">Ver en el mapa →</a>
+    </div>
+  </section>
+
+  <section aria-label="Cuenta atrás">
+    <h2 style="text-align:center">Faltan</h2>
+    <div class="cuenta" id="cuenta">
+      <div><b id="d">--</b><span>días</span></div>
+      <div><b id="h">--</b><span>horas</span></div>
+      <div><b id="m">--</b><span>min</span></div>
+      <div><b id="s">--</b><span>seg</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>La noche</h2>
+    <ul class="programa">
+      <li><time>20:30</time><p>Bienvenida<em>Copa de cortesía al llegar</em></p></li>
+      <li><time>21:00</time><p>Corte de cinta<em>Unas palabras y brindis</em></p></li>
+      <li><time>21:30</time><p>Picoteo del mar<em>Para probar lo que vamos a servir</em></p></li>
+      <li><time>23:00</time><p>Música y fiesta<em>DJ en directo</em></p></li>
+    </ul>
+  </section>
+
+  <section class="rsvp" aria-labelledby="rsvp-t">
+    <h2 id="rsvp-t">Confirma tu asistencia</h2>
+    <p>Rellena tus datos antes del 16 de noviembre. Al pulsar el botón se abre WhatsApp con el mensaje listo: solo tienes que darle a enviar.</p>
+
+    <form id="form" class="form" novalidate>
+      <div class="campo">
+        <label for="nombre">Nombre y apellidos</label>
+        <input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Ej. Lucía Romero" required>
+      </div>
+
+      <fieldset class="campo">
+        <legend>¿Vienes?</legend>
+        <div class="opciones">
+          <label class="opt"><input type="radio" name="va" id="va-si" value="si" checked><span>Sí, allí estaré</span></label>
+          <label class="opt"><input type="radio" name="va" id="va-no" value="no"><span>No puedo ir</span></label>
+        </div>
+      </fieldset>
+
+      <div class="fila2" id="bloque-si">
+        <div class="campo">
+          <label for="personas">Personas en total</label>
+          <select id="personas" name="personas">
+            <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="tel-inv">Tu teléfono</label>
+          <input id="tel-inv" name="tel" type="tel" autocomplete="tel" placeholder="Opcional">
+        </div>
+      </div>
+
+      <div class="campo">
+        <label for="nota">Alergias o comentarios</label>
+        <textarea id="nota" name="nota" rows="2" placeholder="Opcional"></textarea>
+      </div>
+
+      <div class="error" id="error" role="alert" hidden>Escribe tu nombre para que sepamos quién eres.</div>
+
+      <a class="btn enviar" id="enviar" href="#" target="_blank" rel="noopener">Enviar confirmación por WhatsApp</a>
+      <div class="toast" id="toast" role="status"></div>
+    </form>
+
+    <p class="alt">¿No se abre WhatsApp? Escríbenos al <span class="tel" id="tel">600 000 000</span>
+      <button class="btn ghost mini" id="copiar" type="button">Copiar número</button></p>
+  </section>
+
+  <footer>Dress code: blanco y azul, opcional pero muy agradecido.</footer>
+</div>
+
+<script>
+// Fecha del evento (hora de España)
+const EVENTO = new Date("2026-11-20T20:30:00+01:00");
+const pad = n => String(n).padStart(2,"0");
+function tick(){
+  let diff = Math.max(0, EVENTO - Date.now());
+  const d = Math.floor(diff/864e5); diff -= d*864e5;
+  const h = Math.floor(diff/36e5); diff -= h*36e5;
+  const m = Math.floor(diff/6e4); diff -= m*6e4;
+  const s = Math.floor(diff/1e3);
+  document.getElementById("d").textContent = d;
+  document.getElementById("h").textContent = pad(h);
+  document.getElementById("m").textContent = pad(m);
+  document.getElementById("s").textContent = pad(s);
+}
+tick(); setInterval(tick, 1000);
+
+document.getElementById("copiar").addEventListener("click", () => {
+  const t = document.getElementById("toast");
+  const num = document.getElementById("tel").textContent;
+  navigator.clipboard.writeText(num).then(
+    () => t.textContent = "Número copiado",
+    () => { const r = document.createRange(); r.selectNodeContents(document.getElementById("tel"));
+            const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+            t.textContent = "Número seleccionado, cópialo desde el menú"; }
+  );
+});
+
+// Formulario → mensaje de WhatsApp al anfitrión
+const ANFITRION = "34600000000"; // número del anfitrión con prefijo de país, sin + ni espacios
+const f = document.getElementById("form");
+const enviar = document.getElementById("enviar");
+const nombre = document.getElementById("nombre");
+const bloqueSi = document.getElementById("bloque-si");
+const errorBox = document.getElementById("error");
+
+function mensaje(){
+  const n = nombre.value.trim();
+  const va = f.va.value === "si";
+  const nota = f.nota.value.trim();
+  const tel = f.tel.value.trim();
+  let txt = va
+    ? `¡Hola! Confirmo asistencia a la inauguración de Brisa Marina 🌊\n\n👤 ${n}\n👥 Personas: ${f.personas.value}`
+    : `¡Hola! Soy ${n}. Lo siento, no podré ir a la inauguración de Brisa Marina. ¡Mucha suerte con la apertura!`;
+  if (va && tel) txt += `\n📞 ${tel}`;
+  if (nota) txt += `\n📝 ${nota}`;
+  return txt;
+}
+function actualizar(){
+  bloqueSi.hidden = f.va.value !== "si";
+  enviar.textContent = f.va.value === "si" ? "Enviar confirmación por WhatsApp" : "Avisar por WhatsApp";
+  enviar.href = "https://wa.me/" + ANFITRION + "?text=" + encodeURIComponent(mensaje());
+  if (nombre.value.trim()) { errorBox.hidden = true; nombre.classList.remove("mal"); }
+}
+f.addEventListener("input", actualizar);
+f.addEventListener("change", actualizar);
+f.addEventListener("submit", e => e.preventDefault());
+enviar.addEventListener("click", e => {
+  actualizar();
+  if (!nombre.value.trim()) {
+    e.preventDefault();
+    errorBox.hidden = false; nombre.classList.add("mal"); nombre.focus();
+    return;
+  }
+  document.getElementById("toast").textContent = "Abriendo WhatsApp… recuerda pulsar enviar allí.";
+});
+actualizar();
+
+// Olas
+(function(){
+  const c = document.getElementById("olas"), ctx = c.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function size(){ const r = devicePixelRatio||1; c.width = c.clientWidth*r; c.height = c.clientHeight*r; ctx.setTransform(r,0,0,r,0,0); }
+  size(); addEventListener("resize", size);
+  const capas = [
+    {a:7, l:180, v:.6, y:28, col:"rgba(159,195,196,.35)"},
+    {a:9, l:240, v:-.45, y:40, col:"rgba(238,246,244,.55)"},
+    {a:6, l:130, v:.9, y:52, col:"rgba(244,198,90,.6)"}
+  ];
+  function draw(t){
+    const w = c.clientWidth;
+    ctx.clearRect(0,0,w,70);
+    capas.forEach(k=>{
+      ctx.beginPath();
+      for(let x=0;x<=w;x+=4){
+        const y = k.y + Math.sin((x/k.l)*Math.PI*2 + t/1000*k.v)*k.a;
+        x? ctx.lineTo(x,y) : ctx.moveTo(x,y);
+      }
+      ctx.strokeStyle = k.col; ctx.lineWidth = 1.6; ctx.stroke();
+    });
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>
