@@ -655,7 +655,27 @@ document.getElementById("reservar-menu").addEventListener("click", e => {
 });
 
 // Formulario → mensaje de WhatsApp al anfitrión
-const ANFITRION = "34657626889"; // número del anfitrión con prefijo de país, sin + ni espacios
+const ANFITRION = "34657626889";
+// Dirección de la hoja de reservas (Google Apps Script). Vacía = no se guarda.
+const HOJA = "https://script.google.com/macros/s/AKfycbwV6bM0GfvA8jy8TLbl1w8-LmmIVW4K5PiblDX_PUnQNCwVYQxZUrfjrzUKeTED4eHc/exec";
+function registrar(){
+  if (!HOJA) return;
+  const va = f.va.value === "si";
+  const datos = new URLSearchParams({
+    nombre: nombre.value.trim(),
+    viene: va ? "Sí" : "No",
+    personas: va ? f.personas.value : "",
+    almuerzo: va ? (f.come.value === "si" ? "Sí" : "No") : "",
+    menus: va && f.come.value === "si" ? f.comensales.value : "",
+    telefono: f.tel.value.trim(),
+    comentarios: f.nota.value.trim()
+  });
+  try {
+    if (!(navigator.sendBeacon && navigator.sendBeacon(HOJA, datos))) {
+      fetch(HOJA, {method:"POST", mode:"no-cors", body:datos, keepalive:true}).catch(()=>{});
+    }
+  } catch(e) {}
+} // número del anfitrión con prefijo de país, sin + ni espacios
 const f = document.getElementById("form");
 const enviar = document.getElementById("enviar");
 const nombre = document.getElementById("nombre");
@@ -706,6 +726,7 @@ enviar.addEventListener("click", e => {
     document.getElementById("come-si").focus({preventScroll:true});
     return;
   }
+  registrar();
   document.getElementById("toast").textContent = "Abriendo WhatsApp… recuerda pulsar enviar allí.";
 });
 actualizar();
