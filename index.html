@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:title" content="Inauguración Brisa Marina">
-<meta property="og:description" content="Viernes 20 de noviembre · desde las 13:30 h. Almuerzo de inauguración con reserva. ¡Te esperamos!">
+<meta property="og:description" content="Viernes 20 de noviembre · de 13:30 a 19:30 h. Almuerzo con espectáculo en directo y DJ. ¡Te esperamos!">
 <title>Inauguración Brisa Marina</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -288,6 +288,15 @@ body.bloq{overflow:hidden}
 .h-cierre{margin:4px 0 0;text-align:center;font-family:var(--f-carta);font-size:22px;line-height:1.3;color:var(--niebla)}
 .h-cierre em{font-weight:600;font-size:28px;color:var(--espuma)}
 @media (max-width:480px){.h-def{grid-template-columns:1fr}.historia h2{font-size:30px}}
+.club-incluye{padding:16px 16px 6px;border-radius:16px;background:var(--tinta);color:#fff;text-align:left}
+.club-incluye h4{margin:0 0 6px;font-family:var(--f-mono);font-weight:400;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--sol)}
+.club-incluye ul{list-style:none;margin:0;padding:0}
+.club-incluye li{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid rgba(255,255,255,.12)}
+.club-incluye li:first-child{border-top:0}
+.club-incluye svg{flex-shrink:0}
+.club-incluye p{margin:0;display:flex;flex-direction:column;min-width:0}
+.club-incluye b{font-size:16px;color:#fff}
+.club-incluye span{font-size:13px;color:rgba(255,255,255,.75)}
 .k-lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--niebla)}
 .lugar a{color:var(--sol);text-underline-offset:3px;font-weight:500;width:fit-content}
 .cuenta{
@@ -372,7 +381,7 @@ footer{text-align:center;font-size:13px;color:var(--niebla)}
   <section class="billete" aria-label="Datos del evento">
     <div class="fila">
       <div class="dato"><span class="k">Día</span><span class="v">Viernes 20<small>de noviembre</small></span></div>
-      <div class="dato"><span class="k">A partir de las</span><span class="v">13:30 h<small>almuerzo a las 14:30</small></span></div>
+      <div class="dato"><span class="k">A partir de las</span><span class="v">13:30 h<small>hasta las 19:30 aprox.</small></span></div>
     </div>
     <div class="corte"></div>
     <div class="lugar">
@@ -403,12 +412,14 @@ footer{text-align:center;font-size:13px;color:var(--niebla)}
     <h2>La experiencia</h2>
     <ul class="programa">
       <li><time>13:30</time><p>Recepción<em>Copa de cortesía, aperitivo y presentación de las instalaciones. Hasta las 14:15.</em></p></li>
-      <li><time>14:30</time><p>Almuerzo de inauguración<em>Menú de 55 € con reserva previa. Hasta las 17:00.</em></p></li>
+      <li><time>14:30</time><p>Almuerzo de inauguración<em>Menú de 55 € con reserva previa, amenizado con espectáculo en directo y sesión de DJ.</em></p></li>
+      <li><time>17:00</time><p>Tarde con música<em>Sigue el espectáculo en directo y la sesión de DJ.</em></p></li>
+      <li><time>19:30</time><p>Fin de la jornada<em>Hora aproximada.</em></p></li>
     </ul>
   </section>
 
   <button class="teaser" id="abrir-menu" type="button" aria-haspopup="dialog">
-    <span class="t-txt"><span class="k-lbl">Almuerzo · 14:30</span><b>Menú de inauguración</b><span class="t-sub">Bebida ilimitada incluida</span><span class="t-plazo plazo-txt">Reservas hasta el 16 de noviembre</span></span>
+    <span class="t-txt"><span class="k-lbl">Almuerzo · 14:30</span><b>Menú de inauguración</b><span class="t-sub">Bebida ilimitada, espectáculo en directo y DJ incluidos</span><span class="t-plazo plazo-txt">Reservas hasta el 16 de noviembre</span></span>
     <span class="t-precio"><b>55 €</b><span>Ver menú →</span></span>
   </button>
 
@@ -538,9 +549,22 @@ footer{text-align:center;font-size:13px;color:var(--niebla)}
           <ul class="tiles una"><li>Nuestro pan <small>con chocolate</small></li></ul>
         </div>
       </div>
-      <div class="club-bebida">
-        <svg viewBox="0 0 32 32" width="34" height="34" aria-hidden="true"><path d="M8 5h16l-2.2 9.5A6 6 0 0 1 16 19a6 6 0 0 1-5.8-4.5Z" fill="#f4c65a"/><path d="M16 19v7M11 27h10" stroke="#f4c65a" stroke-width="2.2" stroke-linecap="round" fill="none"/><circle cx="21" cy="9" r="1.6" fill="#0c2f3d"/></svg>
-        <p><b>Bebida ilimitada</b><span>desde la recepción hasta el final del almuerzo</span></p>
+      <div class="club-incluye">
+        <h4>Incluido en el menú</h4>
+        <ul>
+          <li>
+            <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M8 5h16l-2.2 9.5A6 6 0 0 1 16 19a6 6 0 0 1-5.8-4.5Z" fill="#f4c65a"/><path d="M16 19v7M11 27h10" stroke="#f4c65a" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>
+            <p><b>Bebida ilimitada</b><span>desde la recepción hasta el final del almuerzo</span></p>
+          </li>
+          <li>
+            <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M16 3l3.6 7.6 8.4 1.1-6.1 5.8 1.5 8.3L16 21.8l-7.4 4 1.5-8.3L4 11.7l8.4-1.1Z" fill="#f4c65a"/></svg>
+            <p><b>Espectáculo en directo</b><span>para amenizar el almuerzo y la tarde</span></p>
+          </li>
+          <li>
+            <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="none" stroke="#f4c65a" stroke-width="2.2"/><circle cx="16" cy="16" r="6" fill="none" stroke="#f4c65a" stroke-width="1.4" opacity=".7"/><circle cx="16" cy="16" r="2.2" fill="#f4c65a"/></svg>
+            <p><b>Sesión de DJ</b><span>música hasta el final, sobre las 19:30</span></p>
+          </li>
+        </ul>
       </div>
       <div class="plazo" aria-live="polite"><span class="dot"></span><span class="plazo-txt">Reservas abiertas hasta el 16 de noviembre</span></div>
       <a class="btn enviar" href="#rsvp-t" id="reservar-menu">Reservar mi mesa</a>
@@ -670,10 +694,9 @@ function registrar(){
     telefono: f.tel.value.trim(),
     comentarios: f.nota.value.trim()
   });
+  // Sin cookies: evita que Google redirija a otra cuenta cuando el invitado tiene varias abiertas
   try {
-    if (!(navigator.sendBeacon && navigator.sendBeacon(HOJA, datos))) {
-      fetch(HOJA, {method:"POST", mode:"no-cors", body:datos, keepalive:true}).catch(()=>{});
-    }
+    fetch(HOJA, {method:"POST", mode:"no-cors", credentials:"omit", body:datos, keepalive:true}).catch(()=>{});
   } catch(e) {}
 } // número del anfitrión con prefijo de país, sin + ni espacios
 const f = document.getElementById("form");
