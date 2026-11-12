@@ -391,10 +391,10 @@ footer{text-align:center;font-size:13px;color:var(--niebla)}
       <span class="contacto">Teléfono de Brisa Marina: <a href="tel:+34657626889">657 62 68 89</a></span>
     </div>
     <div class="mapa">
-      <iframe title="Mapa de Brisa Marina" src="https://maps.google.com/maps?q=Las%20Cabezas%20de%20San%20Juan%2C%2041730%2C%20Sevilla%2C%20Espa%C3%B1a&z=14&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe title="Mapa de Brisa Marina" src="https://maps.google.com/maps?q=36.9703994,-5.8681795&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <div class="lugar pie-mapa">
-      <a href="https://www.google.com/maps/search/?api=1&query=Las+Cabezas+de+San+Juan%2C+41730%2C+Sevilla%2C+Espa%C3%B1a" target="_blank" rel="noopener">Cómo llegar con Google Maps →</a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Brisa+Marina+Beach+Pool&destination_place_id=ChIJrZOwAD6bDQ0RGsRlCs4i-iU" target="_blank" rel="noopener">Cómo llegar con Google Maps →</a>
     </div>
   </section>
 
@@ -465,9 +465,9 @@ footer{text-align:center;font-size:13px;color:var(--niebla)}
 
       <div class="fila2" id="bloque-si">
         <div class="campo">
-          <label for="personas">Personas en total</label>
+          <label for="personas">Personas (máx. 2)</label>
           <select id="personas" name="personas">
-            <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+            <option>1</option><option selected>2</option>
           </select>
         </div>
         <div class="campo">
@@ -483,12 +483,12 @@ footer{text-align:center;font-size:13px;color:var(--niebla)}
           <label class="opt"><input type="radio" name="come" id="come-no" value="no"><span>Solo a la recepción</span></label>
         </div>
         <div class="campo" id="bloque-comensales" hidden>
-          <label for="comensales">Menús a reservar</label>
+          <label for="comensales">Menús a reservar (máx. 2)</label>
           <select id="comensales" name="comensales">
-            <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+            <option>1</option><option selected>2</option>
           </select>
         </div>
-        <p class="aviso">La recepción es por invitación de la casa. El menú del almuerzo cuesta 55 € por persona, con bebida ilimitada incluida, y lo paga cada asistente. Al reservar aquí te guardamos mesa.</p>
+        <p class="aviso">Cada invitación es para un máximo de 2 personas. La recepción es por invitación de la casa. El menú del almuerzo cuesta 55 € por persona, con bebida ilimitada incluida, y lo paga cada asistente. Al reservar aquí te guardamos mesa.</p>
       </fieldset>
 
       <div class="campo">
@@ -721,6 +721,9 @@ function mensaje(){
 }
 function actualizar(){
   bloqueSi.hidden = f.va.value !== "si";
+  // No más menús que personas
+  f.comensales.options[1].disabled = f.personas.value === "1";
+  if (+f.comensales.value > +f.personas.value) f.comensales.value = f.personas.value;
   document.getElementById("bloque-comida").hidden = f.va.value !== "si";
   document.getElementById("bloque-comensales").hidden = f.come.value !== "si";
   enviar.textContent = f.va.value === "si" ? "Enviar confirmación por WhatsApp" : "Avisar por WhatsApp";
